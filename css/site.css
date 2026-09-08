@@ -199,19 +199,6 @@ h2 {
   scroll-margin-top: clamp(2.5rem, 7vh, 5.5rem);
 }
 
-.project__head {
-  display: flex;
-  align-items: baseline;
-  gap: clamp(1rem, 2vw, 1.75rem);
-}
-
-.project__index {
-  flex: none;
-  color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-}
-
 .project h3 {
   font-size: clamp(3rem, 5.6vw, 5.2rem);
   line-height: 0.9;
@@ -221,12 +208,23 @@ h2 {
 .project__layout {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-rows: auto auto;
+  gap: clamp(1.25rem, 2.5vw, 2rem) clamp(2rem, 5vw, 5rem);
   align-items: start;
   margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
 }
 
+/* Title sits centred over the thumbnail; the copy starts level with the
+   image top, so row 1 of the second column is intentionally empty. */
+.project__title {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: center;
+}
+
 .project__media {
+  grid-column: 1;
+  grid-row: 2;
   margin: 0;
   background: var(--paper);
   isolation: isolate;
@@ -237,6 +235,11 @@ h2 {
   width: 100%;
   height: auto;
   mix-blend-mode: multiply;
+}
+
+.project__copy {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .project__copy > p {
@@ -399,8 +402,17 @@ h2 {
   .about__portrait { max-width: 10.5rem; }
   .project__layout {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1.5rem;
   }
+
+  .project__title,
+  .project__media,
+  .project__copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project__title { text-align: left; }
 
   .project__media {
     max-width: 20rem;

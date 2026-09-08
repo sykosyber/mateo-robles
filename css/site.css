@@ -118,30 +118,12 @@ h1 {
   text-transform: lowercase;
 }
 
+/* The artwork's paper is pure white, so multiply leaves the page colour exactly
+   as it is. No plate, glow, or feathered edge is needed to hide a seam. */
 .hero__art {
   justify-self: stretch;
   align-self: center;
-  position: relative;
-  padding: clamp(0.35rem, 0.8vw, 0.7rem);
-  border-radius: 0.35rem;
-  background: rgba(244, 241, 233, 0.92);
-  box-shadow:
-    0 0 0 1px rgba(17, 17, 17, 0.03),
-    0 0 36px rgba(244, 241, 233, 0.95);
-}
-
-.hero__art::after {
-  content: "";
-  position: absolute;
-  inset: -1rem;
-  border-radius: 0.65rem;
-  background: radial-gradient(
-    circle at center,
-    rgba(244, 241, 233, 0) 58%,
-    rgba(244, 241, 233, 0.42) 80%,
-    rgba(244, 241, 233, 0.88) 100%
-  );
-  z-index: -1;
+  margin: 0;
 }
 
 .hero__art img {
@@ -184,35 +166,39 @@ h2 {
 .work h2 { margin-bottom: clamp(4rem, 8vw, 7rem); }
 
 .project {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
-  gap: clamp(3rem, 8vw, 9rem);
   padding-top: clamp(2rem, 3vw, 3rem);
   border-top: 1px solid var(--ink);
 }
 
+.project__head {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
 .project__index {
+  flex: none;
   color: var(--muted);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
 }
 
 .project h3 {
-  font-size: clamp(3.8rem, 7.5vw, 7.4rem);
-  line-height: 0.88;
-  letter-spacing: -0.045em;
+  font-size: clamp(3rem, 5.6vw, 5.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
 }
 
 .project__layout {
   display: grid;
-  grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr);
-  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
+  margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
 }
 
 .project__media {
   margin: 0;
-  align-self: start;
 }
 
 .project__media img {
@@ -223,8 +209,8 @@ h2 {
 }
 
 .project__copy > p {
-  max-width: 46rem;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+  max-width: 34rem;
+  margin-top: 0;
   font-size: clamp(1.1rem, 1.45vw, 1.32rem);
 }
 
@@ -316,20 +302,19 @@ h2 {
     max-height: none;
   }
 
-  .section__grid,
-  .project {
+  .section__grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
   .project__layout {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.25rem;
   }
-  
+
   .project__media {
-    max-width: 16rem;
+    max-width: 20rem;
   }
-  .project h3 { font-size: clamp(4rem, 22vw, 7rem); }
+  .project h3 { font-size: clamp(2.75rem, 15vw, 4.5rem); }
   .footer-line { margin-top: 3.5rem; }
 }
 

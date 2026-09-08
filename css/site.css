@@ -321,7 +321,14 @@ h2 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-
+  .project__layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .project__media {
+    max-width: 16rem;
+  }
   .project h3 { font-size: clamp(4rem, 22vw, 7rem); }
   .footer-line { margin-top: 3.5rem; }
 }

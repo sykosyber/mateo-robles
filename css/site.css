@@ -196,11 +196,37 @@ h2 {
   text-wrap: pretty;
 }
 
+/* The lead paragraph is short and the aside beside it is tall, so top-aligning
+   left the column ending high with a void under it. Centre the two against
+   each other instead, and balance the rag of a four-line block. */
+#about .section__grid { align-items: center; }
+
+#about .statement:not(.statement--wide) { text-wrap: balance; }
+
 /* The second paragraph steps out of the label/portrait grid and centres on the
    shell, so it reads as its own passage rather than a continuation. */
 .statement--wide {
-  max-width: 38rem;
+  position: relative;
+  max-width: 44rem;
   margin: clamp(3.5rem, 7vw, 6rem) auto 0;
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+/* A feathered frame: each edge is a hairline that fades out before it reaches
+   the corners, so the block is framed without cutting a hard rectangle into the
+   page. Built from four gradients rather than a masked border, because
+   mask-composite and -webkit-mask-composite take different keywords and
+   disagree about which one wins. */
+.statement--wide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, transparent, var(--frame) 28%, var(--frame) 72%, transparent) top left / 100% 1px no-repeat,
+    linear-gradient(to right, transparent, var(--frame) 28%, var(--frame) 72%, transparent) bottom left / 100% 1px no-repeat,
+    linear-gradient(to bottom, transparent, var(--frame) 28%, var(--frame) 72%, transparent) top left / 1px 100% no-repeat,
+    linear-gradient(to bottom, transparent, var(--frame) 28%, var(--frame) 72%, transparent) top right / 1px 100% no-repeat;
 }
 
 .work h2 { margin-bottom: clamp(4rem, 8vw, 7rem); }

@@ -4,6 +4,7 @@
   --muted: #706c64;
   --hairline: rgba(22, 21, 19, 0.18);
   --btn-edge: rgba(22, 21, 19, 0.3);
+  --frame: rgba(22, 21, 19, 0.32);
   --shell: 1180px;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --section-space: clamp(7rem, 15vw, 13rem);

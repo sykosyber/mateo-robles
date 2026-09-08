@@ -286,17 +286,6 @@ h2 {
   text-transform: uppercase;
 }
 
-/* The closing note is deadpan on purpose, so it is set like a footnote: the
-   interface typeface at body size, not the display serif. */
-.about__note {
-  margin-top: 2.9em;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 0.5em;
-  letter-spacing: 0;
-  line-height: 1.6;
-}
-
 /* A feathered frame: each edge is a hairline that fades out before it reaches
    the corners, so the block is framed without cutting a hard rectangle into the
    page. Built from four gradients rather than a masked border, because
@@ -442,7 +431,18 @@ h2 {
 
 .footer {
   border-top: 1px solid var(--hairline);
-  padding-block: clamp(1.75rem, 3vw, 2.25rem);
+  padding-block: clamp(2.75rem, 5vw, 4rem) clamp(1.75rem, 3vw, 2.25rem);
+}
+
+/* Deadpan on purpose, and a footer is where a note like this actually lives.
+   Set in the interface typeface so it reads as a footnote, not a flourish. */
+.footer__note {
+  max-width: 44rem;
+  margin: 0 0 clamp(2.25rem, 4.5vw, 3.5rem);
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 .footer__inner {

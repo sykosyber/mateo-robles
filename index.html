@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mateo Robles — creative software for perception, interaction, intelligence, and exploration.">
+  <title>Mateo Robles — Creative Software</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#about">Skip to content</a>
+
+  <header class="hero" aria-labelledby="hero-title">
+    <div class="shell hero__shell">
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="hero__copy" data-reveal>
+        <h1 id="hero-title">Mateo Robles</h1>
+        <p class="hero__subtitle">creative software</p>
+      </div>
+
+      <figure class="hero__art" data-reveal data-reveal-delay="1">
+        <img
+          src="assets/mateo-drawing-2022.webp"
+          alt="Mateo Robles's 2022 abstract ink drawing"
+          width="1200"
+          height="1421"
+          decoding="async"
+          fetchpriority="high"
+        >
+      </figure>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="shell section__grid" data-reveal>
+        <h2 id="about-title">About</h2>
+        <p class="statement">I design and build creative software: systems for perception, interaction, intelligence, and exploration. My work moves between software engineering, human-computer interaction, applied machine learning, and computational art. I am interested in software not only as a tool, but as a medium that can change what people notice, understand, and create.</p>
+      </div>
+    </section>
+
+    <section class="section work" id="work" aria-labelledby="work-title">
+      <div class="shell" data-reveal>
+        <h2 id="work-title">Selected Work</h2>
+        <article class="project" aria-labelledby="rise-title">
+          <div class="project__index" aria-hidden="true">01</div>
+          <div class="project__body">
+            <h3 id="rise-title">RISE</h3>
+            <p>An immersive browser-based reading environment for focused audiovisual text exploration — combining rapid serial presentation, procedural visuals, adaptive pacing, and generative audio into a single experience.</p>
+            <div class="project__links" aria-label="RISE links">
+              <a href="https://try-rise.syberlabs.space" target="_blank" rel="noreferrer">Try RISE ↗</a>
+              <a href="https://rise.syberlabs.space/" target="_blank" rel="noreferrer">Full system ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="shell section__grid" data-reveal>
+        <h2 id="contact-title">Contact</h2>
+        <div>
+          <div class="contact__links" aria-label="Contact links">
+            <span aria-disabled="true">Email</span>
+            <a href="https://github.com/SyberLabs" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/automateon/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a href="https://syberlabs.space" target="_blank" rel="noreferrer">SyberLabs ↗</a>
+          </div>
+          <p class="footer-line">© Mateo Robles</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

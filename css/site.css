@@ -196,20 +196,67 @@ h2 {
   text-wrap: pretty;
 }
 
-/* The lead paragraph is short and the aside beside it is tall, so top-aligning
-   left the column ending high with a void under it. Centre the two against
-   each other instead, and balance the rag of a four-line block. */
-#about .section__grid { align-items: center; }
+/* About runs on its own grid so both paragraphs share the text column's left
+   edge and the long one sits right of centre, under the lead. */
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
+  column-gap: clamp(3rem, 8vw, 9rem);
+  row-gap: clamp(3.5rem, 7vw, 6rem);
+  align-items: start;
+}
 
-#about .statement:not(.statement--wide) { text-wrap: balance; }
+.about__aside {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* The aside is taller than four lines of text, so the lead centres against it
+   rather than leaving a void beneath. balance evens the rag of a block short
+   enough for the browser to reflow it. */
+.about__grid > .statement:not(.statement--wide) {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  /* Sits a little below the drawing's midline rather than dead centre. */
+  transform: translateY(clamp(1rem, 2.5vw, 2.25rem));
+  text-wrap: balance;
+}
+
+/* A feathered oval around the drawing. It lives outside .about__portrait so it
+   is not inside that element's isolated blend group, where the multiply would
+   darken it. */
+.about__frame {
+  position: relative;
+  width: fit-content;
+}
+
+.about__frame::before {
+  content: "";
+  position: absolute;
+  inset: -11% -19%;
+  border: 1px solid var(--frame);
+  border-radius: 50%;
+  pointer-events: none;
+  /* A radial-gradient ring reads uneven here: on an ellipse the ray length
+     changes with angle, so a fixed-percentage band is thicker at the poles
+     than the flanks. A real border keeps one weight all the way round; a
+     single-layer mask fades it top and bottom, leaving two arcs. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
+}
 
 /* The second paragraph steps out of the label/portrait grid and centres on the
    shell, so it reads as its own passage rather than a continuation. */
 .statement--wide {
+  --frame-pad: clamp(1.75rem, 3.5vw, 2.75rem);
   position: relative;
-  max-width: 44rem;
-  margin: clamp(3.5rem, 7vw, 6rem) auto 0;
-  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 3.5vw, 2.75rem);
+  grid-column: 2;
+  grid-row: 2;
+  /* Pulled left by its own padding so the text inside lines up with the
+     paragraph above rather than sitting indented from it. */
+  margin: 0 0 0 calc(-1 * var(--frame-pad));
+  padding: clamp(2rem, 4vw, 3.25rem) var(--frame-pad);
 }
 
 /* A feathered frame: each edge is a hairline that fades out before it reaches
@@ -450,6 +497,35 @@ h2 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+
+  .about__aside { grid-row: auto; }
+
+  /* These mirror the desktop selectors exactly. A shorter selector loses to the
+     base rule's :not(), which silently left the lead in column 2 and forced an
+     implicit second track. */
+  .about__grid > .statement:not(.statement--wide) {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: start;
+    transform: none;
+  }
+
+  .about__grid > .statement--wide {
+    grid-column: 1;
+    grid-row: auto;
+    /* The desktop pull-left would hang the frame outside the gutter here. */
+    margin-left: 0;
+    --frame-pad: 1.35rem;
+  }
+
+  /* The desktop inset is wider than the gutter at this size, which clipped the
+     oval against the viewport edge. */
+  .about__frame::before { inset: -10% -9%; }
 
   .about__portrait { max-width: 10.5rem; }
   .project__layout {

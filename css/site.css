@@ -93,6 +93,7 @@ body {
 
 .hero__copy {
   align-self: center;
+  width: fit-content;
   padding-bottom: 2vh;
 }
 
@@ -116,6 +117,10 @@ h1 {
   font-size: clamp(0.9rem, 1vw, 1.08rem);
   letter-spacing: 0.28em;
   text-transform: lowercase;
+  text-align: center;
+  /* letter-spacing adds a trailing space after the last character, which pulls
+     centred text left by half that amount. Nudge it back. */
+  text-indent: 0.14em;
 }
 
 /* The artwork's paper is pure white, so multiplying it against --paper returns
@@ -191,7 +196,12 @@ h2 {
   text-wrap: pretty;
 }
 
-.statement > p + p { margin-top: 0.85em; }
+/* The second paragraph steps out of the label/portrait grid and centres on the
+   shell, so it reads as its own passage rather than a continuation. */
+.statement--wide {
+  max-width: 38rem;
+  margin: clamp(3.5rem, 7vw, 6rem) auto 0;
+}
 
 .work h2 { margin-bottom: clamp(4rem, 8vw, 7rem); }
 
@@ -394,6 +404,10 @@ h2 {
     margin-top: 1rem;
     font-size: 0.86rem;
     letter-spacing: 0.22em;
+    /* The title wraps and left-aligns here, so centring the subtitle on the
+       container would float it away from the name above it. */
+    text-align: left;
+    text-indent: 0;
   }
 
   .hero__art {

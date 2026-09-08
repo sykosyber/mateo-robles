@@ -75,8 +75,8 @@
                 visuals, and adaptive pacing into a unique user experience.
               </p>
               <div class="project__links" aria-label="RISE links">
-                <a href="https://try-rise.syberlabs.space" target="_blank" rel="noreferrer">Try RISE ↗</a>
-                <a href="https://rise.syberlabs.space/" target="_blank" rel="noreferrer">Full system ↗</a>
+                <a class="btn btn--solid" href="https://try-rise.syberlabs.space" target="_blank" rel="noreferrer">Try RISE <span aria-hidden="true">↗</span></a>
+                <a class="btn" href="https://rise.syberlabs.space/" target="_blank" rel="noreferrer">Full system <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </div>
@@ -87,17 +87,23 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="shell section__grid" data-reveal>
         <h2 id="contact-title">Contact</h2>
-        <div>
-          <div class="contact__links" aria-label="Contact links">
-            <span aria-disabled="true">Email</span>
-            <a href="https://github.com/SyberLabs" target="_blank" rel="noreferrer">GitHub ↗</a>
-            <a href="https://www.linkedin.com/in/automateon/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-            <a href="https://syberlabs.space" target="_blank" rel="noreferrer">SyberLabs ↗</a>
-          </div>
-          <p class="footer-line">© Mateo Robles</p>
-        </div>
+        <ul class="contact__links">
+          <li>
+            <a class="contact__email" href="mailto:syberlabs.software@gmail.com">syberlabs.software@gmail.com</a>
+          </li>
+          <li><a href="https://github.com/sykosyber" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.linkedin.com/in/automateon/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://syberlabs.space" target="_blank" rel="noreferrer">SyberLabs <span aria-hidden="true">↗</span></a></li>
+        </ul>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <span>© Mateo Robles</span>
+      <a href="#hero-title">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
 </body>
 </html>

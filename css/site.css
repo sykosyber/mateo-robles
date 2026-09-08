@@ -259,6 +259,44 @@ h2 {
   padding: clamp(2rem, 4vw, 3.25rem) var(--frame-pad);
 }
 
+/* Three typographic levels inside the passage, so it reads as a structure
+   rather than a wall of display serif. Sizes are in em so they track the
+   statement's own clamp. */
+.statement--wide > p + p { margin-top: 0.85em; }
+
+.about__quote {
+  margin: 2.35em 0 0;
+  font-size: 0.62em;
+  line-height: 1.45;
+}
+
+.about__quote blockquote {
+  margin: 0;
+  font-style: italic;
+}
+
+.about__quote figcaption {
+  margin-top: 0.65em;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.62em;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* The closing note is deadpan on purpose, so it is set like a footnote: the
+   interface typeface at body size, not the display serif. */
+.about__note {
+  margin-top: 2.9em;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.5em;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
 /* A feathered frame: each edge is a hairline that fades out before it reaches
    the corners, so the block is framed without cutting a hard rectangle into the
    page. Built from four gradients rather than a masked border, because

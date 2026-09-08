@@ -203,7 +203,26 @@ h2 {
   letter-spacing: -0.045em;
 }
 
-.project__body > p {
+.project__layout {
+  display: grid;
+  grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.project__media {
+  margin: 0;
+  align-self: start;
+}
+
+.project__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.project__copy > p {
   max-width: 46rem;
   margin-top: clamp(2rem, 4vw, 3.5rem);
   font-size: clamp(1.1rem, 1.45vw, 1.32rem);
@@ -306,6 +325,7 @@ h2 {
   .project h3 { font-size: clamp(4rem, 22vw, 7rem); }
   .footer-line { margin-top: 3.5rem; }
 }
+
 
 @media (max-width: 380px) {
   .nav { gap: 1rem; }

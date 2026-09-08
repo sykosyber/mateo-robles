@@ -121,9 +121,31 @@ h1 {
 .hero__art {
   justify-self: stretch;
   align-self: center;
+  position: relative;
+  padding: clamp(0.35rem, 0.8vw, 0.7rem);
+  border-radius: 0.35rem;
+  background: rgba(244, 241, 233, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(17, 17, 17, 0.03),
+    0 0 36px rgba(244, 241, 233, 0.95);
+}
+
+.hero__art::after {
+  content: "";
+  position: absolute;
+  inset: -1rem;
+  border-radius: 0.65rem;
+  background: radial-gradient(
+    circle at center,
+    rgba(244, 241, 233, 0) 58%,
+    rgba(244, 241, 233, 0.42) 80%,
+    rgba(244, 241, 233, 0.88) 100%
+  );
+  z-index: -1;
 }
 
 .hero__art img {
+  display: block;
   width: min(100%, 590px);
   height: auto;
   max-height: min(72vh, 700px);

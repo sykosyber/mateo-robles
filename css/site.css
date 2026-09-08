@@ -175,6 +175,10 @@ h2 {
 .project {
   padding-top: clamp(2rem, 3vw, 3rem);
   border-top: 1px solid var(--ink);
+  /* Nav "Work" targets this block, not the section, so the whole RISE entry
+     lands in view. The offset scales with viewport height, not width: the block
+     is ~634px tall, and a short laptop clips it if the gap is sized off vw. */
+  scroll-margin-top: clamp(2.5rem, 7vh, 5.5rem);
 }
 
 .project__head {
@@ -241,25 +245,26 @@ h2 {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: background-color 200ms ease, color 200ms ease;
+  background: var(--cream-light);
+  border-color: var(--btn-edge);
+  color: var(--ink);
+  transition: background-color 200ms ease, border-color 200ms ease;
 }
 
 .btn:hover,
-.btn:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
-}
+.btn:focus-visible { background: var(--cream-light-hover); }
 
-/* The live demo is the highest-value link on the page, so it carries the weight. */
+/* The live demo is the highest-value link on the page, so it carries the
+   heavier cream. Both stay in the paper family; weight separates them. */
 .btn--solid {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--cream-deep);
+  border-color: var(--cream-deep);
 }
 
 .btn--solid:hover,
 .btn--solid:focus-visible {
-  background: transparent;
-  color: var(--ink);
+  background: var(--cream-deep-hover);
+  border-color: var(--cream-deep-hover);
 }
 
 .contact__links {

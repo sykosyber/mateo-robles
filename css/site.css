@@ -266,26 +266,33 @@ h2 {
   letter-spacing: 0.09em;
   text-transform: uppercase;
   white-space: nowrap;
-  background: var(--cream-light);
+  background: transparent;
   border-color: var(--btn-edge);
   color: var(--ink);
-  transition: background-color 200ms ease, border-color 200ms ease;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
 }
 
 .btn:hover,
-.btn:focus-visible { background: var(--cream-light-hover); }
+.btn:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
 
-/* The live demo is the highest-value link on the page, so it carries the
-   heavier cream. Both stay in the paper family; weight separates them. */
+/* The live demo is the highest-value link on the page, so it takes the ink.
+   Ink is the body-copy colour, so a filled button sits inside the palette
+   rather than beside it; the hairline keeps the secondary quiet. */
 .btn--solid {
-  background: var(--cream-deep);
-  border-color: var(--cream-deep);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
 }
 
 .btn--solid:hover,
 .btn--solid:focus-visible {
-  background: var(--cream-deep-hover);
-  border-color: var(--cream-deep-hover);
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .contact__links {

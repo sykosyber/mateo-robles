@@ -3,11 +3,7 @@
   --ink: #161513;
   --muted: #706c64;
   --hairline: rgba(22, 21, 19, 0.18);
-  --cream-deep: #e7e0ce;
-  --cream-deep-hover: #ddd4bd;
-  --cream-light: #faf8f2;
-  --cream-light-hover: #f1ece0;
-  --btn-edge: rgba(22, 21, 19, 0.22);
+  --btn-edge: rgba(22, 21, 19, 0.3);
   --shell: 1180px;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --section-space: clamp(7rem, 15vw, 13rem);

@@ -118,12 +118,19 @@ h1 {
   text-transform: lowercase;
 }
 
-/* The artwork's paper is pure white, so multiply leaves the page colour exactly
-   as it is. No plate, glow, or feathered edge is needed to hide a seam. */
+/* The artwork's paper is pure white, so multiplying it against --paper returns
+   --paper exactly and the image has no visible edge.
+   isolation + background are load-bearing: mix-blend-mode blends against the
+   nearest isolated group, and the reveal animation leaves a transform here,
+   which silently creates one. Isolating deliberately and painting --paper
+   underneath means the blend cannot be broken by an ancestor's transform,
+   filter, or opacity. */
 .hero__art {
   justify-self: stretch;
   align-self: center;
   margin: 0;
+  background: var(--paper);
+  isolation: isolate;
 }
 
 .hero__art img {
@@ -199,6 +206,8 @@ h2 {
 
 .project__media {
   margin: 0;
+  background: var(--paper);
+  isolation: isolate;
 }
 
 .project__media img {

@@ -6,7 +6,7 @@ const showAll = () => {
 
 if (!('IntersectionObserver' in window)) {
   showAll();
-} else {
+} else try {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -19,4 +19,8 @@ if (!('IntersectionObserver' in window)) {
   );
 
   revealItems.forEach((item) => observer.observe(item));
+} catch {
+  // The start state is hidden, so anything that goes wrong here must still
+  // end with the content on screen.
+  showAll();
 }

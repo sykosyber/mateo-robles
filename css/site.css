@@ -434,17 +434,6 @@ h2 {
   padding-block: clamp(2.75rem, 5vw, 4rem) clamp(1.75rem, 3vw, 2.25rem);
 }
 
-/* Deadpan on purpose, and a footer is where a note like this actually lives.
-   Set in the interface typeface so it reads as a footnote, not a flourish. */
-.footer__note {
-  max-width: 44rem;
-  margin: 0 0 clamp(2.25rem, 4.5vw, 3.5rem);
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.65;
-  text-wrap: pretty;
-}
-
 .footer__inner {
   display: flex;
   flex-wrap: wrap;

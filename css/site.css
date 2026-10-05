@@ -308,11 +308,15 @@ h2 {
 .project {
   padding-top: clamp(2rem, 3vw, 3rem);
   border-top: 1px solid var(--ink);
-  /* Nav "Work" targets this block, not the section, so the whole RISE entry
+  /* Nav "Work" targets the first entry, not the section, so the whole entry
      lands in view. The offset scales with viewport height, not width: the block
      is ~634px tall, and a short laptop clips it if the gap is sized off vw. */
   scroll-margin-top: clamp(2.5rem, 7vh, 5.5rem);
 }
+
+/* Each later entry gets its own breathing room, so the ink rule above it reads
+   as the start of a new piece rather than a divider inside the last one. */
+.project + .project { margin-top: clamp(5.5rem, 11vw, 10rem); }
 
 .project h3 {
   font-size: clamp(3rem, 5.6vw, 5.2rem);
@@ -352,6 +356,39 @@ h2 {
   mix-blend-mode: multiply;
 }
 
+/* Engines shows four plates as one contact sheet, each opening its own work.
+   The plates are dark prints, not drawings on white, so they opt out of the
+   multiply blend above (same specificity, so this rule must stay after it). */
+.sheet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet a { display: block; }
+
+.sheet img {
+  mix-blend-mode: normal;
+  transition: opacity 200ms ease;
+}
+
+.sheet a:hover img,
+.sheet a:focus-visible img { opacity: 0.84; }
+
+.sheet a:focus-visible { outline-offset: 3px; }
+
+.project__sheet figcaption {
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .project__copy {
   grid-column: 2;
   grid-row: 2;
@@ -363,8 +400,18 @@ h2 {
   font-size: clamp(1.1rem, 1.45vw, 1.32rem);
 }
 
-/* The RISE film sits between the description and the link, at the copy's
-   measure so it reads as part of the entry rather than a second hero. */
+/* The technical line sits under the description, a step quieter, for the
+   reader who wants to know how it works. Scoped like the rule above so it
+   outranks it. */
+.project__copy > .project__note {
+  max-width: 34rem;
+  margin-top: 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* The RISE film sits under the description, at the copy's measure so it
+   reads as part of the entry rather than a second hero. */
 .project__video {
   max-width: 34rem;
   margin-top: clamp(1.75rem, 3vw, 2.5rem);
@@ -588,7 +635,8 @@ h2 {
     grid-row: auto;
   }
 
-  .project__title { text-align: left; }
+  .project__title,
+  .project__sheet figcaption { text-align: left; }
 
   .project__media {
     max-width: 20rem;

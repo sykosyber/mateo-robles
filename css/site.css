@@ -1,5 +1,4 @@
 html {
-  --paper: #f4f1e9;
   background: var(--paper);
   color: var(--ink);
 }
@@ -10,8 +9,9 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
-  line-height: 1.65;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  font-kerning: normal;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -19,6 +19,23 @@ body {
 .shell {
   width: min(calc(100% - (var(--gutter) * 2)), var(--shell));
   margin-inline: auto;
+}
+
+/* The one small-text voice: nav, captions, buttons, credits and the footer all
+   speak in it, so the page's quiet layer reads as one system. */
+.label,
+.nav,
+.btn,
+.project__meta,
+.project__sheet figcaption,
+.about__quote figcaption,
+.footer__inner {
+  font-family: var(--sans);
+  font-size: var(--t-label);
+  font-weight: 450;
+  letter-spacing: var(--label-track);
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .skip-link {
@@ -34,11 +51,13 @@ body {
 
 .skip-link:focus { transform: translateY(0); }
 
+/* ---------- hero ---------- */
+
 .hero {
-  min-height: min(900px, 94vh);
+  min-height: min(820px, 88vh);
   display: grid;
   align-items: center;
-  padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
 }
 
 .hero__shell {
@@ -53,12 +72,11 @@ body {
   grid-column: 1 / -1;
   justify-self: end;
   display: flex;
-  gap: clamp(1.2rem, 2.3vw, 2.4rem);
-  margin-bottom: clamp(3rem, 6vh, 5.5rem);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  margin-bottom: clamp(2.5rem, 5vh, 4.5rem);
 }
 
+/* Links on the page share one hover: a hairline drawn in from the left. */
 .nav a,
 .contact__links a,
 .footer__inner a {
@@ -73,7 +91,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.25rem;
+  bottom: -0.3rem;
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
@@ -100,27 +118,28 @@ body {
 h1, h2, h3 {
   font-family: var(--serif);
   font-weight: 400;
+  text-wrap: balance;
 }
 
 h1 {
   white-space: nowrap;
-  font-size: clamp(2.9rem, 4.25vw, 4rem);
+  font-size: var(--t-name);
   line-height: 1;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+  /* Capitals set this wide need a touch of air at the end of the word too, or
+     the last letter looks clipped against the line's end. */
+  margin-right: -0.07em;
 }
 
 .hero__subtitle {
-  margin-top: 1.4rem;
+  margin-top: 1.35rem;
   color: var(--muted);
   font-family: var(--serif);
-  font-size: clamp(0.9rem, 1vw, 1.08rem);
-  letter-spacing: 0.28em;
-  text-transform: lowercase;
+  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.1875rem);
+  font-style: italic;
+  letter-spacing: 0.06em;
   text-align: center;
-  /* letter-spacing adds a trailing space after the last character, which pulls
-     centred text left by half that amount. Nudge it back. */
-  text-indent: 0.14em;
 }
 
 /* The artwork's paper is pure white, so multiplying it against --paper returns
@@ -140,40 +159,49 @@ h1 {
 
 .hero__art img {
   display: block;
-  width: min(100%, 590px);
+  width: min(100%, 580px);
   height: auto;
-  max-height: min(72vh, 700px);
+  max-height: min(70vh, 680px);
   margin-inline: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
 }
 
+/* ---------- sections ---------- */
+
 .section {
   padding-block: var(--section-space);
-  scroll-margin-top: 2rem;
+  scroll-margin-top: 1.5rem;
 }
 
 .section + .section { border-top: 1px solid var(--hairline); }
 
-.section__grid {
+/* The shared split. Every section's body text starts on the second column's
+   edge, so the page reads down one line. */
+.split {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
-  gap: clamp(3rem, 8vw, 9rem);
+  grid-template-columns: var(--split);
+  column-gap: var(--split-gap);
   align-items: start;
 }
 
+.split > .col-text { grid-column: 2; }
+
 h2 {
-  font-size: clamp(1.35rem, 2vw, 1.9rem);
-  line-height: 1.1;
+  font-size: var(--t-h2);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
 }
+
+/* ---------- about ---------- */
 
 /* Same compositing contract as the hero: white paper multiplied against
    --paper disappears, and isolating here keeps the blend independent of the
    reveal animation's transform. Kept deliberately smaller than the hero so it
    reads as a mark beside the text, not a second artwork. */
 .about__portrait {
-  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
-  max-width: 14rem;
+  margin: 0;
+  max-width: 13rem;
   background: var(--paper);
   isolation: isolate;
 }
@@ -186,40 +214,31 @@ h2 {
 }
 
 .statement {
-  max-width: 45rem;
+  max-width: 34rem;
   font-family: var(--serif);
-  font-size: clamp(1.55rem, 2.45vw, 2.35rem);
-  line-height: 1.32;
-  letter-spacing: -0.018em;
+  font-size: var(--t-statement);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
   /* Keeps a single word from being stranded on the last line. Ignored by
      browsers that do not support it, which just get the default wrap. */
   text-wrap: pretty;
 }
 
-/* About runs on its own grid so both paragraphs share the text column's left
-   edge and the long one sits right of centre, under the lead. */
-.about__grid {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
-  column-gap: clamp(3rem, 8vw, 9rem);
-  row-gap: clamp(3.5rem, 7vw, 6rem);
-  align-items: start;
-}
+.about__grid { row-gap: clamp(3rem, 6vw, 5rem); }
 
+/* The portrait sits at the inner edge of its column, so it stays close to the
+   words it belongs to rather than drifting to the page margin. */
 .about__aside {
   grid-column: 1;
   grid-row: 1;
+  justify-self: end;
+  align-self: center;
 }
 
-/* The aside is taller than four lines of text, so the lead centres against it
-   rather than leaving a void beneath. balance evens the rag of a block short
-   enough for the browser to reflow it. */
 .about__grid > .statement:not(.statement--wide) {
   grid-column: 2;
   grid-row: 1;
   align-self: center;
-  /* Sits a little below the drawing's midline rather than dead centre. */
-  transform: translateY(clamp(1rem, 2.5vw, 2.25rem));
   text-wrap: balance;
 }
 
@@ -229,6 +248,7 @@ h2 {
 .about__frame {
   position: relative;
   width: fit-content;
+  margin-inline: 1.75rem;
 }
 
 .about__frame::before {
@@ -246,27 +266,25 @@ h2 {
   mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
 }
 
-/* The second paragraph steps out of the label/portrait grid and centres on the
-   shell, so it reads as its own passage rather than a continuation. */
+/* The second passage sits in a feathered frame, pulled left by its own padding
+   so the text inside stays on the column line with the paragraph above. */
 .statement--wide {
   --frame-pad: clamp(1.75rem, 3.5vw, 2.75rem);
   position: relative;
   grid-column: 2;
   grid-row: 2;
-  /* Pulled left by its own padding so the text inside lines up with the
-     paragraph above rather than sitting indented from it. */
+  max-width: calc(34rem + 2 * var(--frame-pad));
   margin: 0 0 0 calc(-1 * var(--frame-pad));
-  padding: clamp(2rem, 4vw, 3.25rem) var(--frame-pad);
+  padding: clamp(2rem, 4vw, 3rem) var(--frame-pad);
 }
 
-/* Three typographic levels inside the passage, so it reads as a structure
-   rather than a wall of display serif. Sizes are in em so they track the
-   statement's own clamp. */
+/* Three levels inside the passage: statement, quotation, credit. Sizes are in
+   em so they track the statement's own scale. */
 .statement--wide > p + p { margin-top: 0.85em; }
 
 .about__quote {
-  margin: 2.35em 0 0;
-  font-size: 0.62em;
+  margin: 1.9em 0 0;
+  font-size: 0.6em;
   line-height: 1.45;
 }
 
@@ -276,14 +294,8 @@ h2 {
 }
 
 .about__quote figcaption {
-  margin-top: 0.65em;
+  margin-top: 0.9rem;
   color: var(--muted);
-  font-family: var(--sans);
-  font-size: 0.62em;
-  font-style: normal;
-  letter-spacing: 0.1em;
-  line-height: 1.4;
-  text-transform: uppercase;
 }
 
 /* A feathered frame: each edge is a hairline that fades out before it reaches
@@ -303,42 +315,53 @@ h2 {
     linear-gradient(to bottom, transparent, var(--frame) 28%, var(--frame) 72%, transparent) top right / 1px 100% no-repeat;
 }
 
-.work h2 { margin-bottom: clamp(4rem, 8vw, 7rem); }
+/* ---------- work ---------- */
+
+.work h2 { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
 
 .project {
-  padding-top: clamp(2rem, 3vw, 3rem);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
   border-top: 1px solid var(--ink);
   /* Nav "Work" targets the first entry, not the section, so the whole entry
-     lands in view. The offset scales with viewport height, not width: the block
-     is ~634px tall, and a short laptop clips it if the gap is sized off vw. */
-  scroll-margin-top: clamp(2.5rem, 7vh, 5.5rem);
+     lands in view. The offset scales with viewport height, not width: a short
+     laptop clips the block if the gap is sized off vw. */
+  scroll-margin-top: clamp(2.5rem, 7vh, 5rem);
 }
 
 /* Each later entry gets its own breathing room, so the ink rule above it reads
    as the start of a new piece rather than a divider inside the last one. */
-.project + .project { margin-top: clamp(5.5rem, 11vw, 10rem); }
+.project + .project { margin-top: clamp(4.5rem, 9vw, 7.5rem); }
 
 .project h3 {
-  font-size: clamp(3rem, 5.6vw, 5.2rem);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  font-size: var(--t-display);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
 }
 
 .project__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   grid-template-rows: auto auto;
-  gap: clamp(1.25rem, 2.5vw, 2rem) clamp(2rem, 5vw, 5rem);
-  align-items: start;
-  margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
+  row-gap: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
-/* Title sits centred over the thumbnail; the copy starts level with the
-   image top, so row 1 of the second column is intentionally empty. */
+/* Row 1 is the entry's header: the title over the image, and on the text
+   column a line of facts sitting on the title's baseline. */
 .project__title {
   grid-column: 1;
   grid-row: 1;
-  text-align: center;
+  align-self: last baseline;
+}
+
+.project__meta {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: last baseline;
+  margin: 0;
+  color: var(--muted);
+}
+
+.project__meta span + span::before {
+  content: "·";
+  margin-inline: 0.7em;
 }
 
 .project__media {
@@ -384,12 +407,8 @@ h2 {
 .sheet a:focus-visible { outline-offset: 3px; }
 
 .project__sheet figcaption {
-  margin-top: 0.9rem;
+  margin-top: 0.85rem;
   color: var(--muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .project__copy {
@@ -397,29 +416,28 @@ h2 {
   grid-row: 2;
 }
 
+/* The description is the entry's voice; the technical note is a step quieter
+   for the reader who wants to know how it works. Both hold the same measure. */
 .project__copy > p {
-  max-width: 34rem;
-  margin-top: 0;
-  font-size: clamp(1.1rem, 1.45vw, 1.32rem);
+  max-width: 32rem;
+  margin: 0;
+  font-size: var(--t-lede);
+  line-height: 1.55;
+  text-wrap: pretty;
 }
 
-/* The technical line sits under the description, a step quieter, for the
-   reader who wants to know how it works. Scoped like the rule above so it
-   outranks it. */
 .project__copy > .project__note {
-  max-width: 34rem;
-  margin-top: 1.1rem;
+  margin-top: 1.25rem;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: var(--t-small);
+  line-height: 1.65;
 }
 
 /* The RISE film sits under the description, at the copy's measure so it
    reads as part of the entry rather than a second hero. */
 .project__video {
   max-width: 34rem;
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--hairline);
   background: var(--ink);
 }
 
@@ -433,8 +451,8 @@ h2 {
 .project__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+  gap: 0.75rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 /* RISE pairs a square logo with a 16:9 film. Their natural heights differ by a
@@ -452,16 +470,14 @@ h2 {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.55em;
-  padding: 0.72rem 1.25rem;
-  border: 1px solid var(--ink);
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 2.75rem;
+  padding: 0 1.35rem;
+  border: 1px solid var(--btn-edge);
   border-radius: 2px;
-  font-size: 0.76rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
   white-space: nowrap;
   background: transparent;
-  border-color: var(--btn-edge);
   color: var(--ink);
   transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
 }
@@ -473,7 +489,7 @@ h2 {
   color: var(--paper);
 }
 
-/* The live demo is the highest-value link on the page, so it takes the ink.
+/* The live piece is the highest-value link in each entry, so it takes the ink.
    Ink is the body-copy colour, so a filled button sits inside the palette
    rather than beside it; the hairline keeps the secondary quiet. */
 .btn--solid {
@@ -489,42 +505,52 @@ h2 {
   color: var(--ink);
 }
 
+/* ---------- contact ---------- */
+
+.contact { padding-bottom: clamp(4rem, 7vw, 6rem); }
+
+.contact h2 { grid-column: 1; }
+
+.contact__body {
+  grid-column: 2;
+  display: grid;
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.contact__email {
+  width: fit-content;
+  font-family: var(--serif);
+  font-size: var(--t-statement);
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  overflow-wrap: anywhere;
+  /* An underline the address carries at rest: it is the one thing in this
+     section a visitor is meant to act on. */
+  text-decoration: underline;
+  text-decoration-color: var(--frame);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 180ms ease;
+}
+
+.contact__email:hover,
+.contact__email:focus-visible { text-decoration-color: currentColor; }
+
 .contact__links {
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.contact__email {
-  font-family: var(--serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-  line-height: 1.2;
-  overflow-wrap: anywhere;
+/* The framed print closes the page at the text column's width. It is a dark
+   print made for its own ground, so it carries no blend or border. */
+.contact__art {
+  max-width: 34rem;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0;
 }
-
-.contact { padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
-
-/* The links sit beside a piece of the work: a framed print on the dark ground
-   it was made for, so it carries no blend or border of its own. */
-.contact__body {
-  display: grid;
-  /* the links column is as wide as the email, so the address never breaks */
-  grid-template-columns: max-content minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-}
-
-/* Below this the art would be squeezed small, so it sits under the links. */
-@media (max-width: 1100px) {
-  .contact__body { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
-  .contact__art { max-width: 34rem; }
-}
-
-.contact__art { margin: 0; }
 
 .contact__art img {
   display: block;
@@ -532,9 +558,11 @@ h2 {
   height: auto;
 }
 
+/* ---------- footer ---------- */
+
 .footer {
   border-top: 1px solid var(--hairline);
-  padding-block: clamp(2.75rem, 5vw, 4rem) clamp(1.75rem, 3vw, 2.25rem);
+  padding-block: clamp(1.75rem, 3vw, 2.25rem);
 }
 
 .footer__inner {
@@ -544,13 +572,14 @@ h2 {
   align-items: baseline;
   gap: 0.75rem 2rem;
   color: var(--muted);
-  font-size: 0.8rem;
 }
 
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 5px;
 }
+
+/* ---------- reveal ---------- */
 
 @keyframes reveal-in {
   from { opacity: 0; transform: translateY(12px); }
@@ -569,19 +598,19 @@ h2 {
   animation-delay: 100ms;
 }
 
+/* ---------- narrower screens ---------- */
+
 @media (max-width: 980px) {
   .hero__shell {
     grid-template-columns: minmax(20rem, 0.88fr) minmax(24rem, 1.12fr);
     column-gap: 2rem;
   }
-
-  h1 { font-size: clamp(2.55rem, 4.4vw, 3.25rem); }
 }
 
 @media (max-width: 760px) {
   .hero {
     min-height: auto;
-    padding-top: 1.4rem;
+    padding-top: 1.25rem;
   }
 
   .hero__shell {
@@ -593,7 +622,7 @@ h2 {
     grid-column: 1;
     justify-self: start;
     grid-row: 1;
-    margin-bottom: clamp(4.5rem, 14vw, 7rem);
+    margin-bottom: clamp(3.5rem, 12vw, 5.5rem);
   }
 
   .hero__copy {
@@ -603,23 +632,21 @@ h2 {
 
   h1 {
     white-space: normal;
-    font-size: clamp(2.15rem, 11vw, 3.1rem);
+    font-size: clamp(2.25rem, 11vw, 3.1rem);
     letter-spacing: 0.06em;
+    line-height: 1.04;
   }
 
   .hero__subtitle {
     margin-top: 1rem;
-    font-size: 0.86rem;
-    letter-spacing: 0.22em;
     /* The title wraps and left-aligns here, so centring the subtitle on the
        container would float it away from the name above it. */
     text-align: left;
-    text-indent: 0;
   }
 
   .hero__art {
     grid-row: 3;
-    margin-top: clamp(3.5rem, 10vw, 6rem);
+    margin-top: clamp(2.5rem, 9vw, 4rem);
   }
 
   .hero__art img {
@@ -627,31 +654,32 @@ h2 {
     max-height: none;
   }
 
-  .section__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  /* One column: the split's second column becomes the only one. These mirror
+     the desktop selectors exactly; a shorter selector loses to the base rule's
+     :not(), which once left the lead in column 2 and forced an implicit
+     second track. */
+  .split { grid-template-columns: minmax(0, 1fr); }
 
-  .about__grid {
-    grid-template-columns: 1fr;
-    row-gap: 2.5rem;
-  }
-
-  .about__aside { grid-row: auto; }
-
-  /* These mirror the desktop selectors exactly. A shorter selector loses to the
-     base rule's :not(), which silently left the lead in column 2 and forced an
-     implicit second track. */
-  .about__grid > .statement:not(.statement--wide) {
+  .split > .col-text,
+  .contact h2,
+  .contact__body,
+  .about__aside,
+  .about__grid > .statement:not(.statement--wide),
+  .about__grid > .statement--wide,
+  .project__title,
+  .project__meta,
+  .project__media,
+  .project__copy,
+  .project--film .project__links {
     grid-column: 1;
     grid-row: auto;
-    align-self: start;
-    transform: none;
   }
+
+  .about__grid { row-gap: 2.5rem; }
+  .about__aside { justify-self: start; }
+  .about__frame { margin-inline: 1.25rem 0; }
 
   .about__grid > .statement--wide {
-    grid-column: 1;
-    grid-row: auto;
     /* The desktop pull-left would hang the frame outside the gutter here. */
     margin-left: 0;
     --frame-pad: 1.35rem;
@@ -660,37 +688,19 @@ h2 {
   /* The desktop inset is wider than the gutter at this size, which clipped the
      oval against the viewport edge. */
   .about__frame::before { inset: -10% -9%; }
+  .about__portrait { max-width: 10rem; }
 
-  .about__portrait { max-width: 10.5rem; }
-  .project__layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+  .contact h2 { margin-bottom: 1.5rem; }
 
-  .project__title,
-  .project__media,
-  .project__copy,
-  .project--film .project__links {
-    grid-column: 1;
-    grid-row: auto;
-  }
+  .project__layout { row-gap: 1.25rem; }
+  .project__meta { margin-top: -0.25rem; }
 
-  .project__title,
-  .project__sheet figcaption { text-align: left; }
-
-  .project__media {
-    max-width: 20rem;
-  }
-  .project h3 { font-size: clamp(2.75rem, 15vw, 4.5rem); }
-
-  .project__links { gap: 0.7rem; }
-  .btn { flex: 1 1 100%; justify-content: center; }
+  .project__links { gap: 0.6rem; }
+  .btn { flex: 1 1 100%; }
 }
 
-
 @media (max-width: 380px) {
-  .nav { gap: 1rem; }
-  h1 { font-size: 2.05rem; }
+  .nav { gap: 1.1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

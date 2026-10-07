@@ -437,6 +437,18 @@ h2 {
   margin-top: clamp(2rem, 4vw, 3.5rem);
 }
 
+/* RISE pairs a square logo with a 16:9 film. Their natural heights differ by a
+   few pixels and change with the width, so the row stretches both to the same
+   bottom edge: the logo fills the row (its black margin absorbs the crop) and
+   the film sits at the foot of the copy column. The button gets a row of its
+   own below, so it never shifts that alignment. */
+.project--film .project__media { align-self: stretch; display: flex; flex-direction: column; }
+.project--film .project__media img { flex: 1 1 auto; min-height: 0; object-fit: cover; }
+.project--film .project__copy { align-self: stretch; display: flex; flex-direction: column; }
+.project--film .project__copy > p { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+.project--film .project__video { width: 100%; margin-top: auto; }
+.project--film .project__links { grid-column: 2; grid-row: 3; margin-top: 0; }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -657,7 +669,8 @@ h2 {
 
   .project__title,
   .project__media,
-  .project__copy {
+  .project__copy,
+  .project--film .project__links {
     grid-column: 1;
     grid-row: auto;
   }

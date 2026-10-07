@@ -357,8 +357,11 @@ h2 {
 }
 
 /* Engines shows four plates as one contact sheet, each opening its own work.
-   The plates are dark prints, not drawings on white, so they opt out of the
-   multiply blend above (same specificity, so this rule must stay after it). */
+   The plates, and the RISE logo, are dark prints, not drawings on white, so
+   they opt out of the multiply blend above (same specificity, so these rules
+   must stay after it). */
+.project__media--dark img { mix-blend-mode: normal; }
+
 .sheet {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -492,6 +495,30 @@ h2 {
 }
 
 .contact { padding-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+
+/* The links sit beside a piece of the work: a framed print on the dark ground
+   it was made for, so it carries no blend or border of its own. */
+.contact__body {
+  display: grid;
+  /* the links column is as wide as the email, so the address never breaks */
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+/* Below this the art would be squeezed small, so it sits under the links. */
+@media (max-width: 1100px) {
+  .contact__body { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .contact__art { max-width: 34rem; }
+}
+
+.contact__art { margin: 0; }
+
+.contact__art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 .footer {
   border-top: 1px solid var(--hairline);
